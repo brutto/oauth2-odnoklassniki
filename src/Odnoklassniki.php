@@ -29,13 +29,13 @@ class Odnoklassniki extends AbstractProvider
     protected $defaultUserFields = [
         'uid',
         'name',
+        'email',
         'first_name',
         'last_name',
         'location',
         'pic_3',
         'gender',
         'locale',
-        'photo_id'
     ];
     
     /**
@@ -73,7 +73,7 @@ class Odnoklassniki extends AbstractProvider
     protected function getDefaultScopes()
     {
         return [
-            'VALUABLE_ACCESS', 'GET_EMAIL'
+            'VALUABLE_ACCESS'
         ];
     }
 

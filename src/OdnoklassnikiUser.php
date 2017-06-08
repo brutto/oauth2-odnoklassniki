@@ -4,7 +4,7 @@ namespace Aego\OAuth2\Client\Provider;
 
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 
-class OdnoklassnikiResourceOwner implements ResourceOwnerInterface
+class OdnoklassnikiUser implements ResourceOwnerInterface
 {
     /**
      * @var array

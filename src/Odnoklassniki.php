@@ -16,7 +16,23 @@ class Odnoklassniki extends AbstractProvider
      * @var string
      */
     public $clientPublic = '';
-
+    
+    /** 
+     * 
+     * @var array
+     */ 
+    protected $defaultUserFields = [
+        'uid',
+        'name',
+        'first_name',
+        'last_name',
+        'location',
+        'pic_3',
+        'gender',
+        'locale',
+        'photo_id'
+    ];
+    
     /**
      * {@inheritdoc}
      */
@@ -38,19 +54,23 @@ class Odnoklassniki extends AbstractProvider
      */
     public function getResourceOwnerDetailsUrl(AccessToken $token)
     {
+        $fields = array_merge($this->defaultUserFields, $this->userFields);
         $param = 'application_key='.$this->clientPublic
-            .'&fields=uid,name,first_name,last_name,location,pic_3,gender,locale,photo_id'
+            .'&fields='.implode(',', $fields)
             .'&method=users.getCurrentUser';
         $sign = md5(str_replace('&', '', $param).md5($token.$this->clientSecret));
         return 'http://api.odnoklassniki.ru/fb.do?'.$param.'&access_token='.$token.'&sig='.$sign;
     }
 
+    $fields = array_merge($this->defaultUserFields, $this->userFields);
     /**
      * {@inheritdoc}
      */
     protected function getDefaultScopes()
     {
-        return [];
+        return [
+            'VALUABLE_ACCESS', 'GET_EMAIL'
+        ];
     }
 
     /**
@@ -71,6 +91,6 @@ class Odnoklassniki extends AbstractProvider
      */
     protected function createResourceOwner(array $response, AccessToken $token)
     {
-        return new OdnoklassnikiResourceOwner($response);
+        return new OdnoklassnikiUser($response);
     }
 }

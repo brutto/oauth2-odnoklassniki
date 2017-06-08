@@ -62,7 +62,6 @@ class Odnoklassniki extends AbstractProvider
         return 'http://api.odnoklassniki.ru/fb.do?'.$param.'&access_token='.$token.'&sig='.$sign;
     }
 
-    $fields = array_merge($this->defaultUserFields, $this->userFields);
     /**
      * {@inheritdoc}
      */

@@ -17,8 +17,13 @@ class Odnoklassniki extends AbstractProvider
      */
     public $clientPublic = '';
     
+    /**
+     * Дополнительные поля профиля, которые можно установить самостоятельно
+     */
+    protected $userFields = [];
+    
     /** 
-     * 
+     * Поля профиля, которые достаются по умолчанию
      * @var array
      */ 
     protected $defaultUserFields = [
